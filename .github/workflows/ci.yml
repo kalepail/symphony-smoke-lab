@@ -1,0 +1,17 @@
+name: smoke-ci
+
+on:
+  push:
+    branches:
+      - main
+      - 'codex/**'
+      - 'smoke/**'
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate smoke repository
+        run: sh scripts/validate-smoke-repo.sh
