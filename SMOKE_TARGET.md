@@ -11,3 +11,4 @@ This file is the canonical mutation target for Symphony smoke tests.
 ## Change Log
 
 - 2026-03-10: Repository bootstrapped for Symphony smoke testing.
+- 2026-03-10: Added smoke change-log coverage entry for SDF-9.
