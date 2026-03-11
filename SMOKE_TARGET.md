@@ -12,4 +12,4 @@ This file is the canonical mutation target for Symphony smoke tests.
 
 - 2026-03-10: Repository bootstrapped for Symphony smoke testing.
 - 2026-03-11: SDF-25 smoke-full rerun preserved the required `SMOKE_TARGET.md` mutation target.
-- 2026-03-11: SDF-27 smoke full run appended the required dated change-log entry for validation.
+- 2026-03-11: SDF-27 smoke-full run appended the required dated change log entry for validation.
