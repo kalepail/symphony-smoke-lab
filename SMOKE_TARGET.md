@@ -11,3 +11,4 @@ This file is the canonical mutation target for Symphony smoke tests.
 ## Change Log
 
 - 2026-03-10: Repository bootstrapped for Symphony smoke testing.
+- 2026-03-11: SDF-12 smoke rerun triggered at 2026-03-11T01:05:47Z after canonical workflow-state migration.
