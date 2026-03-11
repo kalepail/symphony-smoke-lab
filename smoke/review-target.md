@@ -10,3 +10,4 @@ Use this file when a smoke issue explicitly asks for a review-follow-up or rewor
 - SDF-18 review rerun completed on `2026-03-11`.
 - SDF-21 review rerun completed on `2026-03-11`.
 - SDF-21 review rerun completed on `2026-03-11`.
+- SDF-21 full PR flow rerun completed on `2026-03-11`.
