@@ -20,3 +20,4 @@ This file is the canonical mutation target for Symphony smoke tests.
 - 2026-03-11: SDF-30 smoke-full run appended the required dated change log entry for validation.
 - 2026-03-11: TD-6g8PVrhhf2pX2g4m parity smoke validated the Todoist-native workflow and observability UX end to end.
 - 2026-03-12: TD-6g8RVX8xMg7r63mm smoke-full run appended the required dated change log entry after routing/defaults hardening.
+- 2026-03-12: SDF-37 smoke-full run appended the required dated change log entry for validation.
