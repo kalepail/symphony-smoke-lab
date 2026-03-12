@@ -11,4 +11,3 @@ This file is the canonical mutation target for Symphony smoke tests.
 ## Change Log
 
 - 2026-03-10: Repository bootstrapped for Symphony smoke testing.
-- 2026-03-12: Smoke update for TD-6g8crJ5pqr4Qx7vJ with live run `symphony-rust-todoist-smoke-e2e-1773341845122`.
