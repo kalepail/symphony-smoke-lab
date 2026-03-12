@@ -11,14 +11,3 @@ This file is the canonical mutation target for Symphony smoke tests.
 ## Change Log
 
 - 2026-03-10: Repository bootstrapped for Symphony smoke testing.
-- 2026-03-11: SDF-25 smoke-full rerun preserved the required `SMOKE_TARGET.md` mutation target.
-- 2026-03-11: SDF-27 smoke-full run appended the required dated change log entry for validation.
-- 2026-03-11: TD-6g8M9xPmxpv28pcF smoke-full validation appended the required change log entry.
-- 2026-03-11: TD-6g8MfgrcQvXGh2QF smoke-full validation appended the required change log entry.
-- 2026-03-11: SDF-29 smoke-full run appended the required dated change log entry for validation.
-- 2026-03-11: TD-6g8MxcC7C2XJQQMm smoke-full validation appended the required change log entry.
-- 2026-03-11: SDF-30 smoke-full run appended the required dated change log entry for validation.
-- 2026-03-11: TD-6g8PVrhhf2pX2g4m parity smoke validated the Todoist-native workflow and observability UX end to end.
-- 2026-03-12: TD-6g8RVX8xMg7r63mm smoke-full run appended the required dated change log entry after routing/defaults hardening.
-- 2026-03-12: TD-6g8X52Fvv7mMg4Xm smoke-full run appended the required dated change log entry for full PR workflow validation.
-- 2026-03-12: SDF-37 smoke-full run appended the required dated change log entry for validation.
