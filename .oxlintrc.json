@@ -1,0 +1,15 @@
+{
+  "env": {
+    "browser": true,
+    "es2024": true
+  },
+  "globals": {
+    "localStorage": "readonly",
+    "requestAnimationFrame": "readonly",
+    "cancelAnimationFrame": "readonly",
+    "crypto": "readonly"
+  },
+  "rules": {
+    "correctness/no-const-assign": "error"
+  }
+}
