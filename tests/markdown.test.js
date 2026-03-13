@@ -57,4 +57,8 @@ describe("renderMarkdown", () => {
   it("returns an empty preview state for blank drafts", () => {
     expect(renderMarkdown("   ")).toContain("preview-empty");
   });
+
+  it("keeps empty blockquotes empty without injecting the top-level placeholder", () => {
+    expect(renderMarkdown(">")).toBe("<blockquote></blockquote>");
+  });
 });
