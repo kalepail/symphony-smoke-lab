@@ -86,10 +86,14 @@ function renderList(lines, ordered) {
   return `<${tag}>${items}</${tag}>`;
 }
 
-export function renderMarkdown(markdown) {
+export function renderMarkdown(markdown, { nested = false } = {}) {
   const normalized = markdown.replace(/\r\n/g, "\n").trimEnd();
 
   if (!normalized.trim()) {
+    if (nested) {
+      return "";
+    }
+
     return [
       '<div class="preview-empty">',
       "<p>Start typing Markdown in the editor and the rendered preview appears here instantly.</p>",
@@ -153,7 +157,7 @@ export function renderMarkdown(markdown) {
         index += 1;
       }
 
-      blocks.push(`<blockquote>${renderMarkdown(quoteLines.join("\n"))}</blockquote>`);
+      blocks.push(`<blockquote>${renderMarkdown(quoteLines.join("\n"), { nested: true })}</blockquote>`);
       continue;
     }
 
