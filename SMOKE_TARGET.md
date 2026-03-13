@@ -12,3 +12,4 @@ This file is the canonical mutation target for Symphony smoke tests.
 
 - 2026-03-10: Repository bootstrapped for Symphony smoke testing.
 - 2026-03-13: Added `hello-from-symphony.html`, a minimal page that says `hello from Symphony`.
+- 2026-03-13: Reworked the placeholder page into a split-view markdown editor with a live HTML preview.
