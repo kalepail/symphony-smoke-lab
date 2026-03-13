@@ -38,8 +38,15 @@ const copyHtmlButton = document.querySelector("#copy-html");
 const clearEditorButton = document.querySelector("#clear-editor");
 
 let frameHandle = 0;
+let saveHandle = 0;
+let pendingDraft = null;
+const saveDelayMs = 180;
 
 function setSaveState(text, tone = "neutral") {
+  if (saveState.textContent === text && saveState.dataset.tone === tone) {
+    return;
+  }
+
   saveState.textContent = text;
   saveState.dataset.tone = tone;
 }
@@ -70,12 +77,40 @@ function scheduleRender(markdown) {
 function persistDraft(markdown) {
   try {
     localStorage.setItem(storageKey, markdown);
+    pendingDraft = null;
     setSaveState("Saved locally", "success");
     return true;
   } catch {
+    pendingDraft = null;
     setSaveState("Autosave unavailable", "warning");
     return false;
   }
+}
+
+function flushPendingDraft() {
+  if (pendingDraft === null) {
+    return true;
+  }
+
+  clearTimeout(saveHandle);
+  saveHandle = 0;
+
+  return persistDraft(pendingDraft);
+}
+
+function scheduleDraftSave(markdown, { immediate = false } = {}) {
+  pendingDraft = markdown;
+
+  if (immediate) {
+    return flushPendingDraft();
+  }
+
+  clearTimeout(saveHandle);
+  setSaveState("Saving locally...", "neutral");
+  saveHandle = window.setTimeout(() => {
+    flushPendingDraft();
+  }, saveDelayMs);
+  return true;
 }
 
 function setDraft(markdown, { focus = false, persist = true } = {}) {
@@ -83,7 +118,7 @@ function setDraft(markdown, { focus = false, persist = true } = {}) {
   scheduleRender(markdown);
 
   if (persist) {
-    persistDraft(markdown);
+    scheduleDraftSave(markdown, { immediate: true });
   }
 
   if (focus) {
@@ -132,7 +167,7 @@ async function copyPreviewHtml() {
 textarea.addEventListener("input", (event) => {
   const nextDraft = event.currentTarget.value;
   scheduleRender(nextDraft);
-  persistDraft(nextDraft);
+  scheduleDraftSave(nextDraft);
 });
 
 textarea.addEventListener("keydown", (event) => {
@@ -152,7 +187,7 @@ textarea.addEventListener("keydown", (event) => {
   textarea.selectionEnd = start + insertion.length;
 
   scheduleRender(nextValue);
-  persistDraft(nextValue);
+  scheduleDraftSave(nextValue);
 });
 
 loadSampleButton.addEventListener("click", () => {
@@ -166,6 +201,10 @@ copyHtmlButton.addEventListener("click", async () => {
 clearEditorButton.addEventListener("click", () => {
   setDraft("", { focus: true });
   setSaveState("Draft cleared", "neutral");
+});
+
+window.addEventListener("pagehide", () => {
+  flushPendingDraft();
 });
 
 setDraft(resolveInitialDraft(), { persist: false });
