@@ -232,6 +232,12 @@ textarea {
   outline: none;
 }
 
+#markdown-input:focus-visible {
+  outline: 2px solid rgba(255, 143, 92, 0.9);
+  outline-offset: -2px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
 #markdown-input::placeholder {
   color: rgba(245, 240, 231, 0.42);
 }

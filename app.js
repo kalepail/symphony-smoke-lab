@@ -49,8 +49,24 @@ function normalizeUrl(rawUrl) {
     return "";
   }
 
-  if (/^(https?:|mailto:|\/|#)/i.test(trimmed)) {
-    return trimmed.replaceAll('"', "%22");
+  if (/^\/\//.test(trimmed)) {
+    return "";
+  }
+
+  const schemeMatch = trimmed.match(/^([a-z][a-z0-9+.-]*):/i);
+
+  if (schemeMatch) {
+    const scheme = schemeMatch[1].toLowerCase();
+
+    if (!["http", "https", "mailto"].includes(scheme)) {
+      return "";
+    }
+
+    return escapeHtml(trimmed);
+  }
+
+  if (/^(#|\/|\?)/.test(trimmed) || /^\.{1,2}\//.test(trimmed) || !trimmed.includes(":")) {
+    return escapeHtml(trimmed);
   }
 
   return "";
@@ -58,8 +74,12 @@ function normalizeUrl(rawUrl) {
 
 function applyInlineMarkdown(source) {
   const codeSpans = [];
+  const placeholderToken =
+    typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
   const withPlaceholders = escapeHtml(source).replace(/`([^`]+)`/g, (_, code) => {
-    const placeholder = `__CODE_SPAN_${codeSpans.length}__`;
+    const placeholder = `\uE000${placeholderToken}:${codeSpans.length}\uE001`;
     codeSpans.push(`<code>${code}</code>`);
     return placeholder;
   });
@@ -84,7 +104,7 @@ function applyInlineMarkdown(source) {
     .replace(/~~([^~]+)~~/g, "<s>$1</s>");
 
   codeSpans.forEach((snippet, index) => {
-    html = html.replace(`__CODE_SPAN_${index}__`, snippet);
+    html = html.replaceAll(`\uE000${placeholderToken}:${index}\uE001`, snippet);
   });
 
   return html;
@@ -174,7 +194,9 @@ function renderMarkdown(markdown) {
         index += 1;
       }
 
-      blocks.push(`<blockquote>${renderMarkdown(quoteLines.join("\n"))}</blockquote>`);
+      const quoteContent = quoteLines.join("\n");
+      const quoteHtml = quoteContent.trim() ? renderMarkdown(quoteContent) : "";
+      blocks.push(`<blockquote>${quoteHtml}</blockquote>`);
       continue;
     }
 
