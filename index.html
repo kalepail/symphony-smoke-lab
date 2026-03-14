@@ -1,92 +1,90 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Splitview Markdown Studio</title>
-  <meta
-    name="description"
-    content="A lightweight split-view markdown editor with live preview, local persistence, and a mobile-friendly responsive layout."
-  >
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap"
-    rel="stylesheet"
-  >
-  <link rel="stylesheet" href="./styles.css">
-</head>
-<body>
-  <main class="shell">
-    <header class="hero" aria-label="Product introduction">
-      <div class="hero-copy">
-        <p class="eyebrow">Fast, local, and focused</p>
-        <h1>Splitview Markdown Studio</h1>
-        <p class="lede">
-          Write in a clean code pane and watch it resolve into polished HTML in
-          real time. The layout stays side-by-side on larger screens and stacks
-          naturally on phones.
-        </p>
-      </div>
-      <div class="hero-meta" aria-label="Application features">
-        <p>Autosaves to this browser</p>
-        <p>Keyboard-first editor</p>
-        <p>Responsive split layout</p>
-      </div>
-    </header>
-
-    <section class="workspace" aria-label="Markdown editor workspace">
-      <section class="panel panel-editor" aria-labelledby="editor-title">
-        <div class="panel-header">
-          <div>
-            <p class="panel-label">Markdown</p>
-            <h2 id="editor-title">Draft</h2>
-          </div>
-          <div class="panel-actions">
-            <button id="load-sample" class="ghost-button" type="button">
-              Load sample
-            </button>
-            <button id="clear-editor" class="ghost-button" type="button">
-              Clear
-            </button>
-          </div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Markdown Editor</title>
+    <meta
+      name="description"
+      content="A forward-looking Markdown Editor with live preview, local draft persistence, and a modern Vite, Vitest, and OXC workflow."
+    >
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero" aria-label="Markdown Editor introduction">
+        <div class="hero-copy">
+          <p class="eyebrow">Markdown Editor</p>
+          <h1>Write in raw Markdown. Read it as finished work.</h1>
+          <p class="lede">
+            A focused editor for drafting, previewing, and refining Markdown
+            with a repo shape that now matches the product: Vite for the app
+            loop, Vitest for renderer coverage, and OXC for fast linting.
+          </p>
         </div>
-
-        <div class="editor-chrome" aria-label="Editor status">
-          <span id="word-count">0 words</span>
-          <span id="line-count">0 lines</span>
-          <span>Tab inserts spaces</span>
+        <div class="hero-stack" aria-label="Repository stack">
+          <p>Vite dev + build</p>
+          <p>Vitest renderer checks</p>
+          <p>OXC lint entry point</p>
         </div>
+      </header>
 
-        <label class="sr-only" for="markdown-input">Markdown input</label>
-        <textarea
-          id="markdown-input"
-          spellcheck="false"
-          autocomplete="off"
-          autocapitalize="off"
-          placeholder="# Start with a heading"
-          aria-describedby="editor-help"
-        ></textarea>
-        <p id="editor-help" class="panel-footnote">
-          Live preview updates as you type and the draft persists in
-          <code>localStorage</code>.
-        </p>
+      <section class="workspace" aria-label="Markdown editor workspace">
+        <section class="panel panel-editor" aria-labelledby="editor-title">
+          <div class="panel-header">
+            <div>
+              <p class="panel-label">Input</p>
+              <h2 id="editor-title">Markdown draft</h2>
+            </div>
+            <div class="panel-actions">
+              <button id="load-sample" class="ghost-button" type="button">
+                Load sample
+              </button>
+              <button id="copy-html" class="ghost-button" type="button">
+                Copy HTML
+              </button>
+              <button id="clear-editor" class="ghost-button" type="button">
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <div class="editor-chrome" aria-label="Editor status">
+            <span id="save-state">Starting…</span>
+            <span id="word-count">0 words</span>
+            <span id="line-count">0 lines</span>
+            <span id="read-time">0 min read</span>
+            <span>Tab inserts spaces</span>
+          </div>
+
+          <label class="sr-only" for="markdown-input">Markdown input</label>
+          <textarea
+            id="markdown-input"
+            spellcheck="false"
+            autocomplete="off"
+            autocapitalize="off"
+            placeholder="# Start with a heading"
+            aria-describedby="editor-help"
+          ></textarea>
+          <p id="editor-help" class="panel-footnote">
+            Drafts are restored from <code>localStorage</code> when available.
+            The preview intentionally escapes raw HTML.
+          </p>
+        </section>
+
+        <section class="panel panel-preview" aria-labelledby="preview-title">
+          <div class="panel-header">
+            <div>
+              <p class="panel-label">Output</p>
+              <h2 id="preview-title">Rendered preview</h2>
+            </div>
+            <div class="preview-badge">Live</div>
+          </div>
+
+          <article id="preview-output" class="preview"></article>
+        </section>
       </section>
+    </main>
 
-      <section class="panel panel-preview" aria-labelledby="preview-title">
-        <div class="panel-header">
-          <div>
-            <p class="panel-label">Rendered HTML</p>
-            <h2 id="preview-title">Preview</h2>
-          </div>
-          <div class="preview-badge">Live</div>
-        </div>
-
-        <article id="preview-output" class="preview"></article>
-      </section>
-    </section>
-  </main>
-
-  <script type="module" src="./app.js"></script>
-</body>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>

@@ -1,32 +1,51 @@
-# Symphony Smoke Lab
+# Markdown Editor
 
-This repository currently hosts a lightweight split-view markdown editor built
-as a static web app. The product stays intentionally small:
+This repository is now shaped around a single product: a Markdown Editor with a
+live preview, local draft persistence, and a modern repo workflow based on
+VoidZero and OXC tooling.
 
-- left side for writing markdown
-- right side for rendered HTML preview
-- responsive layout that stacks cleanly on mobile
-- no build step required to open the app locally
+## Stack
 
-Open [index.html](./index.html) directly in a browser to use the editor.
+- `vite` for local development and production builds
+- `vitest` for renderer coverage
+- `oxlint` for fast linting
+- plain browser JavaScript for the editor itself
 
-## Canonical Mutation Target
+## App Structure
 
-Default smoke workflows should edit [SMOKE_TARGET.md](./SMOKE_TARGET.md) unless
-the issue explicitly says otherwise.
+- [index.html](./index.html) is the Vite entry document
+- [src/main.js](./src/main.js) wires the editor UI and browser persistence
+- [src/markdown.js](./src/markdown.js) contains the Markdown rendering logic
+- [src/styles.css](./src/styles.css) contains the application styles
+- [tests/markdown.test.js](./tests/markdown.test.js) covers the renderer
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
 
 ## Validation
 
-Run:
+Run the repo smoke validation:
 
 ```bash
 sh scripts/validate-smoke-repo.sh
 ```
 
-CI runs the same command on pushes and pull requests.
+When dependencies are installed, the full local check is:
 
-## Notes
+```bash
+npm run check
+```
 
-- The editor persists draft content in browser `localStorage`.
-- The markdown renderer is dependency-free and escapes raw HTML by default.
-- GitHub label `symphony` is reserved for Symphony-created pull requests.
+## Smoke Workflow Files
+
+This repository still keeps a small amount of Symphony workflow scaffolding
+because the repo is also used for live smoke tasks:
+
+- [SMOKE_TARGET.md](./SMOKE_TARGET.md)
+- [smoke/review-target.md](./smoke/review-target.md)
+
+Those files are operational repo fixtures, not part of the Markdown Editor UI.
