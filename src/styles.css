@@ -4,20 +4,20 @@
 
 @layer base {
   :root {
-    --background: 34 36% 96%;
-    --foreground: 23 28% 14%;
-    --card: 36 33% 98%;
-    --card-foreground: 23 28% 14%;
-    --popover: 36 33% 98%;
-    --popover-foreground: 23 28% 14%;
-    --primary: 20 72% 46%;
-    --primary-foreground: 35 60% 98%;
-    --secondary: 34 28% 91%;
-    --secondary-foreground: 23 28% 14%;
-    --muted: 32 26% 91%;
-    --muted-foreground: 22 16% 39%;
-    --accent: 24 76% 90%;
-    --accent-foreground: 20 72% 24%;
+    --background: 40 20% 95%;
+    --foreground: 20 16% 12%;
+    --card: 36 24% 98%;
+    --card-foreground: 20 16% 12%;
+    --popover: 36 24% 98%;
+    --popover-foreground: 20 16% 12%;
+    --primary: 18 68% 42%;
+    --primary-foreground: 36 40% 97%;
+    --secondary: 34 20% 90%;
+    --secondary-foreground: 20 16% 12%;
+    --muted: 34 16% 92%;
+    --muted-foreground: 24 10% 40%;
+    --accent: 30 38% 89%;
+    --accent-foreground: 18 42% 26%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
     --border: 25 22% 82%;
@@ -61,7 +61,10 @@
   }
 
   body {
-    @apply min-h-screen bg-background text-foreground font-sans;
+    @apply min-h-screen bg-background text-foreground font-sans antialiased;
+    background-image:
+      radial-gradient(circle at top, hsl(var(--accent) / 0.5), transparent 34%),
+      linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted) / 0.65));
   }
 
   button,
@@ -94,21 +97,21 @@
   }
 
   .preview-content h1 {
-    @apply text-4xl sm:text-5xl;
+    @apply text-3xl sm:text-4xl;
   }
 
   .preview-content h2 {
-    @apply text-3xl;
+    @apply text-2xl sm:text-3xl;
   }
 
   .preview-content h3 {
-    @apply text-2xl;
+    @apply text-xl sm:text-2xl;
   }
 
   .preview-content p,
   .preview-content li,
   .preview-content blockquote {
-    @apply text-base leading-8 text-foreground/90;
+    @apply text-[0.98rem] leading-7 text-foreground/90;
   }
 
   .preview-content p,
@@ -162,7 +165,7 @@
   }
 
   .preview-empty {
-    @apply grid min-h-[26rem] place-items-center text-center text-muted-foreground;
+    @apply grid min-h-[42vh] place-items-center text-center text-muted-foreground;
   }
 
   .preview-empty p {
