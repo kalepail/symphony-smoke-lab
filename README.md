@@ -9,14 +9,18 @@ VoidZero and OXC tooling.
 - `vite` for local development and production builds
 - `vitest` for renderer coverage
 - `oxlint` for fast linting
-- plain browser JavaScript for the editor itself
+- `react` for the application shell
+- `tailwindcss` plus shadcn-style components for the UI system
 
 ## App Structure
 
 - [index.html](./index.html) is the Vite entry document
-- [src/main.js](./src/main.js) wires the editor UI and browser persistence
+- [src/main.js](./src/main.js) boots the React entry module
+- [src/bootstrap.jsx](./src/bootstrap.jsx) mounts the React application
+- [src/app.jsx](./src/app.jsx) contains the editor experience and theme logic
 - [src/markdown.js](./src/markdown.js) contains the Markdown rendering logic
-- [src/styles.css](./src/styles.css) contains the application styles
+- [src/styles.css](./src/styles.css) contains the Tailwind layers and theme tokens
+- [src/components/ui](./src/components/ui) contains shadcn-style UI primitives
 - [tests/markdown.test.js](./tests/markdown.test.js) covers the renderer
 
 ## Development
