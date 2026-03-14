@@ -45,6 +45,10 @@ function countWords(markdown) {
   return trimmed ? trimmed.split(/\s+/).length : 0;
 }
 
+function formatWordCount(wordCount) {
+  return `${wordCount} ${wordCount === 1 ? "word" : "words"}`;
+}
+
 export function App() {
   const textareaRef = useRef(null);
   const saveTimerRef = useRef(0);
@@ -58,6 +62,25 @@ export function App() {
 
   const previewMarkup = useMemo(() => renderMarkdown(draft), [draft]);
   const wordCount = useMemo(() => countWords(draft), [draft]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const syncTheme = (matchesDark) => {
+      const root = document.documentElement;
+      root.classList.toggle("dark", matchesDark);
+      root.style.colorScheme = matchesDark ? "dark" : "light";
+    };
+
+    syncTheme(mediaQuery.matches);
+
+    const handleChange = (event) => {
+      syncTheme(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -169,7 +192,7 @@ export function App() {
 
             <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
               <StatusBadge tone={saveState.tone}>{saveState.text}</StatusBadge>
-              <StatusBadge>{wordCount} words</StatusBadge>
+              <StatusBadge>{formatWordCount(wordCount)}</StatusBadge>
               <StatusBadge>Local draft</StatusBadge>
             </div>
 
