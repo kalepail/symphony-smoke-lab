@@ -6,85 +6,11 @@
     <title>Markdown Editor</title>
     <meta
       name="description"
-      content="A forward-looking Markdown Editor with live preview, local draft persistence, and a modern Vite, Vitest, and OXC workflow."
+      content="A forward-looking Markdown Editor with live preview, local draft persistence, Tailwind styling, and a light/dark reading studio."
     >
   </head>
-  <body>
-    <main class="shell">
-      <header class="hero" aria-label="Markdown Editor introduction">
-        <div class="hero-copy">
-          <p class="eyebrow">Markdown Editor</p>
-          <h1>Write in raw Markdown. Read it as finished work.</h1>
-          <p class="lede">
-            A focused editor for drafting, previewing, and refining Markdown
-            with a repo shape that now matches the product: Vite for the app
-            loop, Vitest for renderer coverage, and OXC for fast linting.
-          </p>
-        </div>
-        <div class="hero-stack" aria-label="Repository stack">
-          <p>Vite dev + build</p>
-          <p>Vitest renderer checks</p>
-          <p>OXC lint entry point</p>
-        </div>
-      </header>
-
-      <section class="workspace" aria-label="Markdown editor workspace">
-        <section class="panel panel-editor" aria-labelledby="editor-title">
-          <div class="panel-header">
-            <div>
-              <p class="panel-label">Input</p>
-              <h2 id="editor-title">Markdown draft</h2>
-            </div>
-            <div class="panel-actions">
-              <button id="load-sample" class="ghost-button" type="button">
-                Load sample
-              </button>
-              <button id="copy-html" class="ghost-button" type="button">
-                Copy HTML
-              </button>
-              <button id="clear-editor" class="ghost-button" type="button">
-                Clear
-              </button>
-            </div>
-          </div>
-
-          <div class="editor-chrome" aria-label="Editor status">
-            <span id="save-state">Starting…</span>
-            <span id="word-count">0 words</span>
-            <span id="line-count">0 lines</span>
-            <span id="read-time">0 min read</span>
-            <span>Tab inserts spaces</span>
-          </div>
-
-          <label class="sr-only" for="markdown-input">Markdown input</label>
-          <textarea
-            id="markdown-input"
-            spellcheck="false"
-            autocomplete="off"
-            autocapitalize="off"
-            placeholder="# Start with a heading"
-            aria-describedby="editor-help"
-          ></textarea>
-          <p id="editor-help" class="panel-footnote">
-            Drafts are restored from <code>localStorage</code> when available.
-            The preview intentionally escapes raw HTML.
-          </p>
-        </section>
-
-        <section class="panel panel-preview" aria-labelledby="preview-title">
-          <div class="panel-header">
-            <div>
-              <p class="panel-label">Output</p>
-              <h2 id="preview-title">Rendered preview</h2>
-            </div>
-            <div class="preview-badge">Live</div>
-          </div>
-
-          <article id="preview-output" class="preview"></article>
-        </section>
-      </section>
-    </main>
-
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
