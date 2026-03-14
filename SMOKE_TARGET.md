@@ -12,3 +12,4 @@ This file is the canonical mutation target for Symphony smoke tests.
 
 - 2026-03-10: Repository bootstrapped for Symphony smoke testing.
 - 2026-03-13: Repository refocused around a Vite-based Markdown Editor with Vitest and OXC tooling.
+- 2026-03-13: Added a Tailwind + shadcn-style React UI shell with explicit light and dark mode.
