@@ -128,7 +128,7 @@ export function App() {
       }
 
       if (pendingDraftRef.current !== null) {
-        persistDraft(pendingDraftRef, pendingDraftRef.current, setSaveState);
+        persistDraft(pendingDraftRef, pendingDraftRef.current);
       }
     };
   }, []);
@@ -136,7 +136,7 @@ export function App() {
   useEffect(() => {
     const flushOnHide = () => {
       if (pendingDraftRef.current !== null) {
-        persistDraft(pendingDraftRef, pendingDraftRef.current, setSaveState);
+        persistDraft(pendingDraftRef, pendingDraftRef.current);
       }
     };
 
@@ -233,6 +233,7 @@ export function App() {
               </p>
             </div>
           </div>
+
           <div className="flex flex-col gap-3 xl:items-end">
             <ThemeToggle value={theme} onChange={setTheme} />
             <div className="grid gap-2 sm:grid-cols-3 xl:w-[25rem]">
@@ -242,6 +243,7 @@ export function App() {
             </div>
           </div>
         </header>
+
         <section className="grid flex-1 gap-4 xl:grid-cols-2">
           <Card className="overflow-hidden border-border/70 bg-card/80 shadow-panel backdrop-blur">
             <CardHeader className="gap-5 border-b border-border/70 bg-background/55">
@@ -265,6 +267,7 @@ export function App() {
                   </Button>
                 </div>
               </div>
+
               <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
                 <StatusChip tone={saveState.tone}>{saveState.text}</StatusChip>
                 <StatusChip>{stats.words}</StatusChip>
@@ -273,6 +276,7 @@ export function App() {
                 <StatusChip>Tab inserts spaces</StatusChip>
               </div>
             </CardHeader>
+
             <CardContent className="flex min-h-[32rem] flex-col gap-4 p-4 sm:p-6">
               <label className="sr-only" htmlFor="markdown-input">
                 Markdown input
@@ -351,7 +355,7 @@ function ThemeToggle({ value, onChange }) {
   );
 }
 
-function StatPill { label, value }) {
+function StatPill({ label, value }) {
   return (
     <div className="rounded-[1.4rem] border border-border/70 bg-background/75 px-3 py-3 shadow-sm">
       <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-muted-foreground">{label}</p>
@@ -360,7 +364,7 @@ function StatPill { label, value }) {
   );
 }
 
-function StatusChip({children, tone = "neutral"}) {
+function StatusChip({ children, tone = "neutral" }) {
   const toneClassName =
     tone === "success"
       ? "border-emerald-500/25 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
@@ -379,9 +383,9 @@ function persistDraft(pendingDraftRef, markdown, setSaveState) {
   try {
     window.localStorage.setItem(draftStorageKey, markdown);
     pendingDraftRef.current = null;
-    setSaveState({ text: "Saved locally", tone: "success" });
+    setSaveState?.({ text: "Saved locally", tone: "success" });
   } catch {
     pendingDraftRef.current = null;
-    setSaveState({ text: "Autosave unavailable", tone: "warning" });
+    setSaveState?.({ text: "Autosave unavailable", tone: "warning" });
   }
 }
